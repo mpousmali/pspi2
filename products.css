@@ -2,13 +2,10 @@
 
 
 header {
-    height: 150px; /* Ορίζει το ύψος του header σε 150 pixels */
+    height: 150px; 
     border-bottom-style: ridge;
 }
 
-header {
-    height: 150px; /* Ορίζει το ύψος του header σε 150 pixels */
-}
 /*.frame1 {
   width: 1200px;
   height: 400px; 
@@ -41,9 +38,11 @@ footer{
 .centered {
     text-align: center;
 }
-.po {
-    font-size: 50px;
-    border-top-style: ridge;
+.bigletter20 {
+  font-size: 20px;
+}
+.bigletter23 {
+    font-size: 23px;
 }
 
 .topnav input[type=text] {
