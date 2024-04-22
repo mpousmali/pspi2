@@ -24,6 +24,9 @@ footer{
   border-collapse: collapse;
 } 
 }
+.space-before::before {
+  content: "\00a0"; /* Unicode χαρακτήρας για ένα κενό */
+}
 
 .bigletter20 {
   font-size: 20px;
