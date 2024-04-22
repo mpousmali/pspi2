@@ -20,8 +20,9 @@ footer{
 } 
 .border{
   table, th { 
-    border: 0.5px solid black;
+    border: 1.5px ridge;
   border-collapse: collapse;
+  border-style: ridge;
 } 
 }
 .space-before::before {
@@ -114,10 +115,18 @@ footer{
     }
   }
 
+
   .arial{
     font-family: Arial, sans-serif;
   }
   
+
+
+  .arial{
+    font-family: Arial, sans-serif;
+  }
+  
+
 
 
 /* END CODE HERE */
