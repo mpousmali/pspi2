@@ -20,8 +20,9 @@ footer{
 } 
 .border{
   table, th { 
-    border: 0.5px solid black;
+    border: 1.5px ridge;
   border-collapse: collapse;
+  border-style: ridge;
 } 
 }
 
@@ -110,7 +111,7 @@ footer{
       border: 1px solid #ccc;  
     }
   }
-  
+
 
 
 /* END CODE HERE */

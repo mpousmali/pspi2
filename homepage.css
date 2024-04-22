@@ -1,12 +1,12 @@
 /* BEGIN CODE HERE */
 header {
-    height: 150px; /* Ορίζει το ύψος του header σε 150 pixels */
+    height: 150px; 
     border-bottom-style: ridge;
 }
 
 .frame1 {
     width: 1200px;
-    height: 400px; /* Ορίζει το ύψος του header σε 150 pixels */
+    height: 400px; 
     text-align: start;
     margin: 0 auto;
 }
@@ -39,7 +39,7 @@ footer {
 .bigletter23{
     font-size: 23px;
 }
-.frame4{
+.fr4{
     height: 400px;
     width: 200px;
     margin: 0 auto;
