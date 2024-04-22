@@ -6,22 +6,6 @@ header {
     border-bottom-style: ridge;
 }
 
-/*.frame1 {
-  width: 1200px;
-  height: 400px; 
-  margin: 0 auto;
-}
-
-.frame2 {
-  width: 1200px;
-  height: 400px; 
-  margin: 0 auto;
-}
-.frame3 {
-  width: 1200px;
-  height: 600px; 
-  margin: 0 auto;
-}*/
 .frame4{ 
   width: 1200px;
   margin: 0 auto;
@@ -40,9 +24,7 @@ footer{
   border-collapse: collapse;
 } 
 }
-.centered {
-    text-align: center;
-}
+
 .bigletter20 {
   font-size: 20px;
 }
