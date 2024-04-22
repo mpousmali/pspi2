@@ -4,19 +4,19 @@ header {
     border-bottom-style: ridge;
 }
 
-frame1 {
+.frame1 {
     width: 1200px;
     height: 400px; /* Ορίζει το ύψος του header σε 150 pixels */
     text-align: start;
     margin: 0 auto;
 }
 
-frame2 {
+.frame2 {
     width: 1200px;
     height: 400px; 
     margin: 0 auto;
 }
-frame3 {
+.frame3 {
     width: 1200px;
     height: 600px; 
     margin: 0 auto;
@@ -39,7 +39,7 @@ footer {
 .bigletter23{
     font-size: 23px;
 }
-frame4{
+.frame4{
     height: 400px;
     width: 200px;
     margin: 0 auto;
