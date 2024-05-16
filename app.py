@@ -1,5 +1,5 @@
 # BEGIN CODE HERE
-from flask import Flask
+from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from pymongo import TEXT
@@ -22,9 +22,12 @@ document = {"name": "example", "age": 25}
 collection.insert_one(document)
 
 # Example: Querying documents from the collection
-#query_result = collection.find({"age": {"$gt": 20}})
-#for doc in query_result:
-#    print(doc)
+query_result = collection.find({"age": {"$gt": 20}})
+for doc in query_result:
+    print(doc)
+
+
+
 
 # END CODE HERE
 
@@ -45,7 +48,6 @@ def search():
 @app.route("/add-product", methods=["POST"])
 def add_product():
     # BEGIN CODE HERE
-
     return ""
     # END CODE HERE
 
