@@ -5,6 +5,7 @@ from flask_cors import CORS
 from pymongo import TEXT
 import base64
 import uuid
+from selenium import webdriver
 
 
 import pymongo
@@ -19,7 +20,7 @@ client = pymongo.MongoClient(mongo_uri)
 db = client["pspi"]
 
 # Example: Inserting a document into a collection
-#collection = db["products"]
+collection = db["products"]
 #document = {"id":"1","name": "f","production_year":2,"price":2,"color":1, "size":2}
 #collection.insert_one(document)
 
@@ -56,7 +57,35 @@ mongo.db.products.create_index([("name", TEXT)])
 @app.route("/search", methods=["GET"])
 def search():
     # BEGIN CODE HERE
-    return ""
+     get_search= request.args.get("search")
+     search=get_search.lower()
+     print(search)
+     products = []
+     query_result = collection.find({}, {'_id':0,'name': 1}).sort({"age":-1})
+     index=0 
+     for doc in query_result:
+        if search in doc.get('name'):
+            apot=collection.find({"name":doc.get('name')})
+            for k in apot:
+               id=k.get('id')
+               name=k.get('name')
+               production_year=k.get('production_year')
+               price=k.get('price')
+               color=k.get('color')
+               size=k.get('size')
+               products.append(id)
+               products.append(name)
+               products.append(production_year)
+               products.append(price)
+               products.append(color)
+               products.append(size)
+               #index,{"id": id, "name": name,"production_year": production_year, "price": price, "color": color , "size": size }
+               #index=index+1
+     for i in products:
+      print(i)
+     if not products:
+        return jsonify([])
+     return jsonify(products)
     # END CODE HERE
 
 
