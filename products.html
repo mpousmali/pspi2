@@ -11,7 +11,7 @@
     <!-- BEGIN CODE HERE -->
     <header>
       <h1>
-        <a href="homepage.html">  
+        <a href="homepage.html">
           <img src="logo.png" width=250px height=58px style="position: relative; left: 60px; top: 60px;">
         </a>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -48,7 +48,6 @@
        </tr>
       </table>
     </div>
-    <script src="products.js"></script>
     <div class="frame5">
       <br> <!-- Κενή γραμμή -->
       <p>
@@ -58,17 +57,18 @@
           </div>
        </div>
     </p>
+    <p id="form" method="POST">
      <form>
        <div class="row mb-3">
          <label for="inputName" class="col-sm-1 col-form-label">Name :</label>
          <div class="col-md-6">
-           <input type="name" class="form-control" id="inputName">
+           <input type="text" class="form-control" id="inputName">
          </div>
        </div>
        <div class="row mb-3">
-         <label for="inputProduction year" class="col-sm-1 col-form-label">Production year</label>
+         <label for="inputProductionYear" class="col-sm-1 col-form-label">Production year</label>
          <div class="col-md-6">  
-           <input type="text" class="form-control" id="inputProduction year">
+           <input type="text" class="form-control" id="inputProductionYear">
          </div>
        </div>
        <div class="row mb-3">
@@ -90,8 +90,32 @@
         </div>
        </div>
        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <button type="save" class="btn btn-primary">Save</button>
+       <button type="save" class="btn btn-primary" onclick=myFunc()>Save </button>
+
+       <script>
+         function myFunc() {
+            //var name = document.getElementById("inputName").value;
+            //var prodYear = document.getElementById("inputProductionYear").value;
+            //var price = document.getElementById("inputPrice").value;
+            //var color = document.getElementById("inputColor").value;
+            //var size = document.getElementById("inputSize").value; 
+            document.getElementById('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(event.target); // Create FormData from form
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value; // Convert FormData to JSON object
+            });
+            document.getElementById('form').style.display='none';
+            productFormOnSubmit();
+           });
+            document.getElementById('form').style.display='none';
+            productFormOnSubmit();
+         }
+       </script>
        </div>
+      </p>
      </form>
      <br>
      <br>
