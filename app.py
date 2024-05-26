@@ -3,10 +3,13 @@ from flask import Flask, jsonify, request, render_template
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from pymongo import TEXT
-import base64
-import uuid
+import numpy as np
 from selenium import webdriver
-
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 import pymongo
 
@@ -18,6 +21,12 @@ client = pymongo.MongoClient(mongo_uri)
 
 # Access or create a database
 db = client["pspi"]
+
+# Αρχικοποίηση του Selenium WebDriver
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
 
 # Example: Inserting a document into a collection
 collection = db["products"]
@@ -43,7 +52,47 @@ collection = db["products"]
 #for doc in query_result:
 #    print(doc)
 
+request = {
+    "id": str,
+    "name": str, 
+    "production_year": int, 
+    "price": int, 
+    "color": int, 
+    "size": int
+ }
 
+json_str = request
+
+# Λήψη των δεδομένων από το body του request
+data = request
+
+# Υπολογισμός της ομοιότητας για κάθε προϊόν στη βάση δεδομένων
+similarity_scores = {}
+for product in db.products.find():
+    # Υπολογισμός της ομοιότητας με βάση τον αλγόριθμο Content Based Filtering
+    # με τη χρήση της βιβλιοθήκης numpy
+    input_vector = np.array([
+        data['id'],
+        data['name'],
+        data['production_year'],
+        data['price'],
+        data['color'],
+        data['size']
+    ])
+    product_vector = np.array([
+        product['id'],
+        product['name'],
+        product['production_year'],
+        product['price'],
+        product['color'],
+        product['size']
+    ])
+    cosine_similarity = np.dot(input_vector, product_vector) / (np.linalg.norm(input_vector) * np.linalg.norm(product_vector))
+    # Επιστρέφει μια τιμή μεταξύ 0 και 1 που αντιπροσωπεύει την ομοιότητα
+    similarity_scores[product['name']] = cosine_similarity
+
+    # Επιλογή των προϊόντων με ομοιότητα πάνω από 70%
+    similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
 
 # END CODE HERE
 
@@ -156,12 +205,46 @@ if (__name__=='__main__'):
 @app.route("/content-based-filtering", methods=["POST"])
 def content_based_filtering():
     # BEGIN CODE HERE
-    return ""
+    # Λήψη των δεδομένων από το body του request
+    #data = request.json
+
+    # Υπολογισμός της ομοιότητας για κάθε προϊόν στη βάση δεδομένων
+    #similarity_scores = {}
+    #for product in mongo.db.products.find():
+        # Υπολογισμός της ομοιότητας με βάση τον αλγόριθμο Content Based Filtering
+        #similarity = calculate_similarity(data, product)
+        #similarity_scores[product['name']] = similarity
+
+    # Επιλογή των προϊόντων με ομοιότητα πάνω από 70%
+    #similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
+
+    #return jsonify(similar_products)
+    return " "
     # END CODE HERE
 
 
 @app.route("/crawler", methods=["GET"])
 def crawler():
     # BEGIN CODE HERE
-    return ""
+    semester = request.args.get('semester', type=int)
+    if semester is None:
+        return jsonify({'error': 'Parameter "semester" is required'}), 400
+
+    url = 'https://qa.auth.gr/el/x/studyguide/600000438/current'
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
+    driver.get(url)
+
+    try:
+        #Αναζήτηση για τα μαθήματα του συγκεκριμένου εξαμήνου
+        wait = WebDriverWait(driver, 10)
+        semester_xpath = f"//div[@data-semester='{semester}']//a[@class='course']"
+        courses_elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, semester_xpath)))
+        
+        courses = [course.text for course in courses_elements]
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        driver.quit()
+
+    return jsonify(courses)
     # END CODE HERE
