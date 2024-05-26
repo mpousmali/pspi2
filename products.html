@@ -22,31 +22,36 @@
 </header>
 <div class="frame4">
   <p class="text-start">
-  <div class="row row-cols-2 align-items-center mb-4">
-    <label class="col-auto" for="inputSearch">Search a product</label>
-    <div class="col-auto">
-    <div class="input-group">
-    <input type="search" class="form-control" id="inputSearch">
-    <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
-    </div>
-    </div>
-    </div>
-  </p>
-    <p class="text-start">
-      <div class="arial">
-      <strong>Results</strong>
-      </div>  
+    <div class="row row-cols-2 align-items-center mb-4">
+      <label class="col-auto" for="inputSearch">Search a product</label>
+      <div class="col-auto">
+      <div class="input-group">
+      <input type="search" class="form-control" id="inputSearch2000">
+      <button type="submit" class="btn btn-primary" onclick="searchButtonOnClick()">Search </button>
+      </div>
+      </div>
+      </div>
     </p>
-      <table class="border" width="1200"  align="center" >
-        <tr>
-        <th><span class="space-before"> </span>ID</th>
-        <th><span class="space-before"> </span>Name</th>
-        <th><span class="space-before"> </span>Production year</th>
-        <th><span class="space-before"> </span>Price</th>
-        <th><span class="space-before"> </span>Color</th>
-        <th><span class="space-before"> </span>Size</th>
-       </tr>
-      </table>
+      <p class="text-start">
+        <div class="arial">
+        <strong>Results</strong>
+        </div>  
+      </p>
+        <table id="dynamic_island" class="border" width="1200"  align="center" >
+          <thead> 
+          <tr>
+          <th><span class="space-before"> </span>ID</th>
+          <th><span class="space-before"> </span>Name</th>
+          <th><span class="space-before"> </span>Production year</th>
+          <th><span class="space-before"> </span>Price</th>
+          <th><span class="space-before"> </span>Color</th>
+          <th><span class="space-before"> </span>Size</th>
+         </tr>
+         </thead>
+         <tbody>
+        </tbody>
+        </table>
+        <script> </script>
     </div>
     <div class="frame5">
       <br> <!-- Κενή γραμμή -->
