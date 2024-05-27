@@ -94,6 +94,7 @@ for product in db.products.find():
     # Επιλογή των προϊόντων με ομοιότητα πάνω από 70%
     similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
 
+
 # END CODE HERE
 
 app = Flask(__name__)
@@ -165,8 +166,8 @@ def add_product():
     #return render_template("products.html",data=information)
     str = request.args.get('name')
     str_lower=str.lower()
-    #id=base64.urlsafe_b64encode(uuid.uuid1().bytes)
-    #str_id=id.replace('=', '')
+    #id=np.randint(10000, 100000)
+    #str_id=str(np.randint(10000, 100000))
     #str_id=str_id[:5]
     #id="a1"
     index = str_lower.find('/')
@@ -185,6 +186,29 @@ def add_product():
     for i in parts[1:]:
         key, value = i.split('=')
         new_person[key] = value
+    if (new_person['size'].lower()=='small'):
+        new_person['size']=1
+    elif (new_person['size'].lower()=='medium'):
+        new_person['size']=2
+    elif (new_person['size'].lower()=='large'):
+        new_person['size']=3
+    elif (new_person['size'].lower()=='extra large'):
+        new_person['size']=4
+    else:
+        new_person['size']=int(new_person['size'])
+
+    if (new_person['color'].lower()=='blue' or new_person['color'].lower()=='μπλε'):
+        new_person['color']=3
+    elif (new_person['color'].lower()=='red' or new_person['color'].lower()=='κοκκινο' or new_person['color'].lower()=='κόκκινο'):
+        new_person['color']=1
+    elif (new_person['color'].lower()=='yellow' or new_person['color'].lower()=='κιτρινο' or new_person['color'].lower()=='κίτρινο'):
+        new_person['color']=2
+    else:
+        new_person['color']=int(new_person['color'])
+
+    new_person['production_year']=int(new_person['production_year'])
+    new_person['price']=float(new_person['price'])
+
     exists = mongo.db.products.find_one({"name": new_person.get('name')})
     if exists is None:
         mongo.db.products.insert_one(new_person)
