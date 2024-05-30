@@ -69,7 +69,7 @@ productFormOnSubmit = (event) => {
 
                 return false;
         }
-        if (!(inputSize.toLowerCase==="small"||inputSize.toLowerCase==="medium"||inputSize.toLowerCase==="large"||inputSize.toLowerCase==="extra large"||
+        if (!(inputSize.toLowerCase()==="small"||inputSize.toLowerCase()==="medium"||inputSize.toLowerCase()==="large"||inputSize.toLowerCase()==="extra large"||
             inputSize==="1"||inputSize==="2"||inputSize==="3"||inputSize==="4")){
                 document.querySelector("."+"error").classList.add("display-error");
                 document.querySelector("."+"error").innerHTML="Invalid Size. 1: small, 2: medium, 3:large, 4: extra large";
