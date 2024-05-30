@@ -62,8 +62,8 @@
           </div>
        </div>
     </p>
-    <p id="form" method="POST">
-     <form>
+    <p id='form' method="POST">
+     <form name="form">
        <div class="row mb-3">
          <label for="inputName" class="col-sm-1 col-form-label">Name :</label>
          <div class="col-md-6">
@@ -95,8 +95,9 @@
         </div>
        </div>
        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <p class="error"></p>
        <button type="save" class="btn btn-primary" onclick=myFunc()>Save </button>
-
+       
        <script>
          function myFunc() {
             //var name = document.getElementById("inputName").value;
@@ -125,6 +126,7 @@
      <br>
      <br>
    </div>
+   <!--<script src="products.js"></script>-->
   <footer>
     <br>
     <strong>

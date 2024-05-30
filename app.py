@@ -52,47 +52,47 @@ collection = db["products"]
 #for doc in query_result:
 #    print(doc)
 
-request = {
-    "id": str,
-    "name": str, 
-    "production_year": int, 
-    "price": int, 
-    "color": int, 
-    "size": int
- }
+#request = {
+#    "id": str,
+#    "name": str, 
+#    "production_year": int, 
+#    "price": int, 
+#    "color": int, 
+#    "size": int
+# }
 
-json_str = request
+#json_str = request
 
 # Λήψη των δεδομένων από το body του request
-data = request
+#data = request
 
 # Υπολογισμός της ομοιότητας για κάθε προϊόν στη βάση δεδομένων
-similarity_scores = {}
-for product in db.products.find():
+#similarity_scores = {}
+#for product in db.products.find():
     # Υπολογισμός της ομοιότητας με βάση τον αλγόριθμο Content Based Filtering
     # με τη χρήση της βιβλιοθήκης numpy
-    input_vector = np.array([
-        data['id'],
-        data['name'],
-        data['production_year'],
-        data['price'],
-        data['color'],
-        data['size']
-    ])
-    product_vector = np.array([
-        product['id'],
-        product['name'],
-        product['production_year'],
-        product['price'],
-        product['color'],
-        product['size']
-    ])
-    cosine_similarity = np.dot(input_vector, product_vector) / (np.linalg.norm(input_vector) * np.linalg.norm(product_vector))
+#    input_vector = np.array([
+#        data['id'],
+#        data['name'],
+#        data['production_year'],
+#        data['price'],
+#        data['color'],
+#        data['size']
+#    ])
+#    product_vector = np.array([
+#        product['id'],
+#        product['name'],
+#        product['production_year'],
+#        product['price'],
+#        product['color'],
+#        product['size']
+#    ])
+#    cosine_similarity = np.dot(input_vector, product_vector) / (np.linalg.norm(input_vector) * np.linalg.norm(product_vector))
     # Επιστρέφει μια τιμή μεταξύ 0 και 1 που αντιπροσωπεύει την ομοιότητα
-    similarity_scores[product['name']] = cosine_similarity
+#    similarity_scores[product['name']] = cosine_similarity
 
     # Επιλογή των προϊόντων με ομοιότητα πάνω από 70%
-    similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
+#    similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
 
 
 # END CODE HERE

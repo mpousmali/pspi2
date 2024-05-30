@@ -127,6 +127,34 @@ footer{
   }
   
 
+  .error{
+    color: #af4242;
+    background-color: #fde8ec;
+    padding: 10px;
+    display: none;
+  }
+
+
+  .error.display-error{
+    display: block;
+    margin-bottom: 20px;
+    transform: translateY(-20px);
+  }
+
+
+  .success{
+    color: #42af6a;
+    background-color: #e8fde9;
+    padding: 10px;
+    display: none;
+  }
+
+  
+  .success.display-success{
+    display: block;
+    margin-bottom: 20px;
+    transform: translateY(-20px);
+  }
 
 
 /* END CODE HERE */
