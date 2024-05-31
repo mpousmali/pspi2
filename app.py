@@ -53,12 +53,12 @@ collection = db["products"]
 #    print(doc)
 
 #request = {
-#    "id": str,
-#    "name": str, 
-#    "production_year": int, 
-#    "price": int, 
-#    "color": int, 
-#    "size": int
+    #"id": str,
+#    "name": "str", 
+#    "production_year": 5, 
+#    "price": 2, 
+#    "color": 2, 
+#    "size": 2
 # }
 
 #json_str = request
@@ -72,20 +72,20 @@ collection = db["products"]
     # Υπολογισμός της ομοιότητας με βάση τον αλγόριθμο Content Based Filtering
     # με τη χρήση της βιβλιοθήκης numpy
 #    input_vector = np.array([
-#        data['id'],
-#        data['name'],
-#        data['production_year'],
-#        data['price'],
-#        data['color'],
-#        data['size']
+        #data['id'],
+#        np.array(data['name']),
+#        np.array(data['production_year']),
+#        np.array(data['price']),
+#        np.array(data['color']),
+#        np.array(data['size'])
 #    ])
 #    product_vector = np.array([
-#        product['id'],
-#        product['name'],
-#        product['production_year'],
-#        product['price'],
-#        product['color'],
-#        product['size']
+        #product['id'],
+#        np.array(product['name']),
+#        np.array(product['production_year']),
+#       np.array(product['price']),
+#        np.array(product['color']),
+#        np.array(product['size'])
 #    ])
 #    cosine_similarity = np.dot(input_vector, product_vector) / (np.linalg.norm(input_vector) * np.linalg.norm(product_vector))
     # Επιστρέφει μια τιμή μεταξύ 0 και 1 που αντιπροσωπεύει την ομοιότητα
@@ -93,6 +93,7 @@ collection = db["products"]
 
     # Επιλογή των προϊόντων με ομοιότητα πάνω από 70%
 #    similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
+#print(similar_products)
 
 
 # END CODE HERE
@@ -166,10 +167,12 @@ def add_product():
     #return render_template("products.html",data=information)
     str = request.args.get('name')
     str_lower=str.lower()
-    #id=np.randint(10000, 100000)
-    #str_id=str(np.randint(10000, 100000))
-    #str_id=str_id[:5]
-    #id="a1"
+    query_result = collection.find({})
+    i=0
+    for doc in query_result:
+        i=i+1
+    i=i+1
+    id= "% s" % i
     index = str_lower.find('/')
 
 
@@ -179,8 +182,9 @@ def add_product():
     # Initialize a dictionary to hold the key-value pairs
     new_person = {}
     #new_person['id']=str_id
+    new_person['id']=id
     new_person['name']=inputName
-    #new_person['id']=str(id)
+    
     
     # Loop through the parts and extract key-value pairs
     for i in parts[1:]:

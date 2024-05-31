@@ -41,6 +41,9 @@ searchButtonOnClick = () => {
 
 productFormOnSubmit = (event) => {
     // BEGIN CODE HERE
+    let btn=document.querySelector('button');
+    let inputs=document.querySelectorAll('input');
+
     let form=document.forms['form'];
     const inputName=document.getElementById("inputName").value;
     const inputProductionYear=document.getElementById("inputProductionYear").value;
@@ -106,6 +109,7 @@ productFormOnSubmit = (event) => {
 
             return false;              
         }
+        event.preventDefault();
 
     //"http://127.0.0.1:5000/add-product?"+"inputName="+name+"inputProductionYear"+year+"inputPrice"+price+"inputColor"+color+"inputSize"+size
     //console.log(name);
@@ -116,8 +120,11 @@ productFormOnSubmit = (event) => {
     .then(response => response.json())
     .then(data => {
         document.querySelector("."+"success").classList.add("display-success");
-        document.querySelector("."+"success").innerHTML="Your request has been completed successfully";
-        document.getElementById('form').style.display='none';
+        document.querySelector("."+"success").innerHTML="Your request has been completed successfully!";
+        //btn.addEventListener('click',() => {
+        inputs.forEach(input=>input.value='');
+        //})
+        //document.getElementById('form').style.display='none';
         event.preventDefault();
         })
     .catch((error) => {

@@ -137,8 +137,8 @@ footer{
 
   .error.display-error{
     display: block;
-    margin-bottom: 20px;
-    transform: translateY(-20px);
+    margin-bottom: 0px;
+    transform: translateY();
   }
 
 
@@ -152,8 +152,8 @@ footer{
   
   .success.display-success{
     display: block;
-    margin-bottom: 20px;
-    transform: translateY(-20px);
+    margin-bottom: 0px;
+    transform: translateY();
   }
 
 
