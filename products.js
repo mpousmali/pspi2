@@ -51,11 +51,16 @@ productFormOnSubmit = (event) => {
     const inputColor=document.getElementById("inputColor").value;
     const inputSize=document.getElementById("inputSize").value;
     form.onsubmit=function(event){
+        let s=document.querySelectorAll(".success");
         let errors=document.querySelectorAll(".error");
         for (let error of errors){
             error.classList.remove("display-error");
             document.getElementById('form').style.display='none';
-        }    
+        } 
+        for (let succes of s){
+            succes.classList.remove("display-success");
+            document.getElementById('form').style.display='none';
+        }   
         if(inputName==="" || inputColor==="" || inputPrice==="" || inputProductionYear==="" || inputSize===""){
             document.querySelector("."+"error").classList.add("display-error");
             document.querySelector("."+"error").innerHTML="All fields are required!"
