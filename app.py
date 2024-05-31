@@ -112,8 +112,7 @@ def search():
      search=get_search.lower()
      print(search)
      products = []
-     query_result = collection.find({}, {'_id':0,'name': 1}).sort({"age":-1})
-     index=0 
+     query_result = collection.find({}, {'_id':0,'name': 1}).sort({"age":-1}) 
      for doc in query_result:
         if search in doc.get('name'):
             apot=collection.find({"name":doc.get('name')})
@@ -130,10 +129,6 @@ def search():
                products.append(price)
                products.append(color)
                products.append(size)
-               #index,{"id": id, "name": name,"production_year": production_year, "price": price, "color": color , "size": size }
-               #index=index+1
-     for i in products:
-      print(i)
      if not products:
         return jsonify([])
      return jsonify(products)

@@ -134,7 +134,18 @@ footer{
     display: none;
   }
 
+  .results{
+    background-color: #80b6e3;
+    padding: 10px;
+    display: none;
+  }
 
+
+  .results.display-results{
+    display: block;
+    margin-bottom: 0px;
+    transform: translateY();
+  }
   .error.display-error{
     display: block;
     margin-bottom: 0px;

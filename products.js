@@ -9,6 +9,7 @@ window.onload = () => {
 searchButtonOnClick = () => {
     // BEGIN CODE HERE
     const search=document.getElementById("inputSearch2000").value;
+    
     //console.log(search);
     path="http://127.0.0.1:5000/search?"+"search="+search
     fetch(path)
@@ -17,8 +18,20 @@ searchButtonOnClick = () => {
      {    
          let table = document.getElementById("dynamic_island").getElementsByTagName('tbody')[0];
          table.innerHTML = '';
-         const x=data;
-         console.log(x.length);
+         if( data.length/6 <1){
+            document.querySelector("."+"results").classList.add("display-results");
+            document.querySelector("."+"results").innerHTML="No product was found with this name";
+         }
+         else{
+            temp=data.length/6;
+            document.querySelector("."+"results").classList.add("display-results");
+            if(temp==1){
+                document.querySelector("."+"results").innerHTML=temp+" result";
+            }else{
+                document.querySelector("."+"results").innerHTML=temp+" results"; 
+            }
+            
+         }
          for (let i = 0; i < data.length/6; i++){    
          // Δημιουργία νέας γραμμής
          let newRow = table.insertRow();
@@ -32,7 +45,7 @@ searchButtonOnClick = () => {
           k++;
           }
        }
-     } /////MHN ΞΕΧΑΣΩ ΤΑ ΚΕΦΑΛΑΙΑΑΑΑΑΑΑ
+     }
      )
     .catch(error => console.error(error));  
     //array=search(name);
