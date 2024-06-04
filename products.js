@@ -39,7 +39,7 @@ searchButtonOnClick = () => {
 
          if( pinakas.length/6 <1){
             document.querySelector("."+"results").classList.add("display-results");
-            document.querySelector("."+"results").innerHTML="No product was found with this name";
+            document.querySelector("."+"results").innerHTML="No product was found ";
          }
          else{
             temp=pinakas.length/6;
