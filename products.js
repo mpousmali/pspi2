@@ -10,6 +10,7 @@ searchButtonOnClick = () => {
     // BEGIN CODE HERE
     const search=document.getElementById("inputSearch2000").value;
     
+    
     path="http://127.0.0.1:5000/search?"+"search="+search
     fetch(path)
     .then(response =>response.json())

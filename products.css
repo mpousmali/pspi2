@@ -134,7 +134,18 @@ body {
   display: none;
 }
 
-.results{
+  .results{
+    background-color: #80b6e3;
+    padding: 10px;
+    display: none;
+  }
+
+
+  .results.display-results{
+    display: block;
+    margin-bottom: 0px;
+    transform: translateY();
+  }.results{
   background-color: #80b6e3;
   padding: 10px;
   display: none;
