@@ -13,88 +13,19 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import pymongo
 
-# Replace these values with your MongoDB connection string
 mongo_uri = "mongodb://localhost:27017/pspi"
 
-# Connect to MongoDB
+
 client = pymongo.MongoClient(mongo_uri)
 
-# Access or create a database
 db = client["pspi"]
 
-# Αρχικοποίηση του Selenium WebDriver
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
-# Example: Inserting a document into a collection
 collection = db["products"]
-#document = {"id":"1","name": "f","production_year":2,"price":2,"color":1, "size":2}
-#collection.insert_one(document)
-
-#new_product = {}
-#new_product["id"] = "1"
-#new_product["name"] = "A4"
-#if (db.products.find({"name":new_product['name']}) is True):
-#    db.products.update_one ({"name":"paper"}, 
-#                           {'$set': {"production_year": 2023, "price":2, "color":2, "size":2}})
-#else:
-#    new_product["production_year"] = 2023
-#    new_product["price"] = 2
-#    new_product["color"] = 2
-#    new_product["size"] = 2
-#    collection.insert_one(new_product)
-
-
-# Example: Querying documents from the collection
-#query_result = collection.find({"age": {"$gt": 20}})
-#for doc in query_result:
-#    print(doc)
-
-#request = {
-    #"id": str,
-#    "name": "str", 
-#    "production_year": 5, 
-#    "price": 2, 
-#    "color": 2, 
-#    "size": 2
-# }
-
-#json_str = request
-
-# Λήψη των δεδομένων από το body του request
-#data = request
-
-# Υπολογισμός της ομοιότητας για κάθε προϊόν στη βάση δεδομένων
-#similarity_scores = {}
-#for product in db.products.find():
-    # Υπολογισμός της ομοιότητας με βάση τον αλγόριθμο Content Based Filtering
-    # με τη χρήση της βιβλιοθήκης numpy
-#    input_vector = np.array([
-        #data['id'],
-#        np.array(data['name']),
-#        np.array(data['production_year']),
-#        np.array(data['price']),
-#        np.array(data['color']),
-#        np.array(data['size'])
-#    ])
-#    product_vector = np.array([
-        #product['id'],
-#        np.array(product['name']),
-#        np.array(product['production_year']),
-#       np.array(product['price']),
-#        np.array(product['color']),
-#        np.array(product['size'])
-#    ])
-#    cosine_similarity = np.dot(input_vector, product_vector) / (np.linalg.norm(input_vector) * np.linalg.norm(product_vector))
-    # Επιστρέφει μια τιμή μεταξύ 0 και 1 που αντιπροσωπεύει την ομοιότητα
-#    similarity_scores[product['name']] = cosine_similarity
-
-    # Επιλογή των προϊόντων με ομοιότητα πάνω από 70%
-#    similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
-#print(similar_products)
-
 
 # END CODE HERE
 
@@ -110,10 +41,8 @@ def search():
     # BEGIN CODE HERE
      get_search= request.args.get("search")
      search=get_search.lower()
-     print(search)
      products = []
-     query_result = collection.find({}, {'_id':0,'name': 1}).sort({"age":-1})
-     index=0 
+     query_result = collection.find({}, {'_id':0,'name': 1}).sort({"price":-1}) 
      for doc in query_result:
         if search in doc.get('name'):
             apot=collection.find({"name":doc.get('name')})
@@ -130,10 +59,6 @@ def search():
                products.append(price)
                products.append(color)
                products.append(size)
-               #index,{"id": id, "name": name,"production_year": production_year, "price": price, "color": color , "size": size }
-               #index=index+1
-     for i in products:
-      print(i)
      if not products:
         return jsonify([])
      return jsonify(products)
@@ -143,28 +68,6 @@ def search():
 @app.route("/add-product", methods=["POST"])
 def add_product():
     # BEGIN CODE HERE
-    #if (request.method=="POST"):
-    #information=request.form
-    #data = request.get_json()
-    #if (not data):
-    #    return jsonify('error')
-    #new_product = {}
-    #new_product["id"] = "1"
-    #new_product["name"] = request.args.get('name')
-    #if (db.products.find({"name":new_product['name']}) is True):
-    #    mongo.db.products.update_one ({"name":request.form['inputName']},
-    #                       {'$set': {"production_year": request.form['inputProductionYear'], "price":request.form['inputPrice'], "color":request.form['inputColor'], "size":request.form['inputSize']}})   
-    #else:
-    #    new_product["production_year"] = request.form['inputProductionYear']
-    #    new_product["price"] = request.form['inputPrice']
-    #    new_product["color"] = request.form['inputColor']
-    #    new_product["size"] = request.form['inputSize']
-    #    mongo.db.products.insert_one(new_product)
-    #print("hi")
-    
-    #return jsonify(new_product)
-
-    #return render_template("products.html",data=information)
     str = request.args.get('name')
     str_lower=str.lower()
     query_result = collection.find({})
@@ -179,14 +82,11 @@ def add_product():
     inputName = str_lower[:index]
     parts = str_lower.split('/')
 
-    # Initialize a dictionary to hold the key-value pairs
     new_person = {}
-    #new_person['id']=str_id
     new_person['id']=id
     new_person['name']=inputName
     
     
-    # Loop through the parts and extract key-value pairs
     for i in parts[1:]:
         key, value = i.split('=')
         new_person[key] = value
@@ -233,21 +133,45 @@ if (__name__=='__main__'):
 @app.route("/content-based-filtering", methods=["POST"])
 def content_based_filtering():
     # BEGIN CODE HERE
-    # Λήψη των δεδομένων από το body του request
-    #data = request.json
 
-    # Υπολογισμός της ομοιότητας για κάθε προϊόν στη βάση δεδομένων
-    #similarity_scores = {}
-    #for product in mongo.db.products.find():
-        # Υπολογισμός της ομοιότητας με βάση τον αλγόριθμο Content Based Filtering
-        #similarity = calculate_similarity(data, product)
-        #similarity_scores[product['name']] = similarity
+    request = {
+       "id": str,
+        "name": "str", 
+       "production_year": 5, 
+       "price": 2, 
+       "color": 2, 
+       "size": 2
+    }
 
-    # Επιλογή των προϊόντων με ομοιότητα πάνω από 70%
-    #similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
+    json_str = request
 
-    #return jsonify(similar_products)
-    return " "
+    data = request
+
+    similarity_scores = {}
+    for product in db.products.find():
+
+     input_vector = np.array([
+        data['id'],
+        np.array(data['name']),
+        np.array(data['production_year']),
+        np.array(data['price']),
+        np.array(data['color']),
+        np.array(data['size'])
+    ])
+    product_vector = np.array([
+        product['id'],
+        np.array(product['name']),
+        np.array(product['production_year']),
+        np.array(product['price']),
+        np.array(product['color']),
+        np.array(product['size'])
+    ])
+    cosine_similarity = np.dot(input_vector, product_vector) / (np.linalg.norm(input_vector) * np.linalg.norm(product_vector))
+    
+    similarity_scores[product['name']] = cosine_similarity
+
+    similar_products = [name for name, similarity in similarity_scores.items() if similarity > 0.7]
+
     # END CODE HERE
 
 
@@ -263,7 +187,6 @@ def crawler():
     driver.get(url)
 
     try:
-        #Αναζήτηση για τα μαθήματα του συγκεκριμένου εξαμήνου
         wait = WebDriverWait(driver, 10)
         semester_xpath = f"//div[@data-semester='{semester}']//a[@class='course']"
         courses_elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, semester_xpath)))

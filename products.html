@@ -35,7 +35,8 @@
       <p class="text-start">
         <div class="arial">
         <strong>Results</strong>
-        </div>  
+        </div> 
+        <p class="results"></p> 
       </p>
         <table id="dynamic_island" class="border" width="1200"  align="center" >
           <thead> 
@@ -54,7 +55,7 @@
         <script> </script>
     </div>
     <div class="frame5">
-      <br> <!-- Κενή γραμμή -->
+      <br>
       <p>
           <div class="bigletter20"> 
           <div class="arial">
@@ -101,18 +102,12 @@
        
        <script>
          function myFunc() {
-            //var name = document.getElementById("inputName").value;
-            //var prodYear = document.getElementById("inputProductionYear").value;
-            //var price = document.getElementById("inputPrice").value;
-            //var color = document.getElementById("inputColor").value;
-            //var size = document.getElementById("inputSize").value; 
             document.getElementById('form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            const formData = new FormData(event.target); // Create FormData from form
+            event.preventDefault(); 
+            const formData = new FormData(event.target);
             const data = {};
             formData.forEach((value, key) => {
-                data[key] = value; // Convert FormData to JSON object
+                data[key] = value;
             });
             document.getElementById('form').style.display='none';
             productFormOnSubmit();
@@ -127,7 +122,6 @@
      <br>
      <br>
    </div>
-   <!--<script src="products.js"></script>-->
   <footer>
     <br>
     <strong>
