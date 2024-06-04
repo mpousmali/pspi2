@@ -157,6 +157,7 @@ body {
   margin-bottom: 0px;
   transform: translateY();
 }
+
 .error.display-error{
   display: block;
   margin-bottom: 0px;
@@ -177,6 +178,5 @@ body {
   margin-bottom: 0px;
   transform: translateY();
 }
-
 
 /* END CODE HERE */

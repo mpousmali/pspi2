@@ -128,14 +128,15 @@ productFormOnSubmit = (event) => {
 
         fetch("http://127.0.0.1:5000/add-product?"+"name="+inputName+"/production_year="+inputProductionYear+"/price="+inputPrice+"/color="+inputColor+"/size="+inputSize, {
         method: 'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
        body: JSON.stringify()
     })
     .then(response => response.json())
     .then(data => {
         alert("OK");
-        document.querySelector("."+"success").classList.add("display-success");
-        document.querySelector("."+"success").innerHTML="Your request has been completed successfully!";
-        inputs.forEach(input=>input.value='');
+        inputs.forEach(input=>input.value='');    
         event.preventDefault();
 
         })
