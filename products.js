@@ -16,8 +16,6 @@ searchButtonOnClick = () => {
     .then(response =>response.json())
     .then(data =>
      {    
-
-        console.log(data)
         pinakas=[];
         k=0;
          for(i=0;i<data.length;i++)

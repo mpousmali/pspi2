@@ -54,7 +54,6 @@ def search():
                color=k.get('color')
                size=k.get('size')
                products.append({"id":id,"name": name,"production_year":production_year,"price":price,"color":color,"size":size})
-     #print(products)
      if not products:
         return jsonify([])
      return jsonify(products)
