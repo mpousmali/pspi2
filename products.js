@@ -16,14 +16,33 @@ searchButtonOnClick = () => {
     .then(response =>response.json())
     .then(data =>
      {    
+
+        console.log(data)
+        pinakas=[];
+        k=0;
+         for(i=0;i<data.length;i++)
+            {
+                pinakas[k+i]=data[i].id;
+                k=k+1;
+                pinakas[k+i]=data[i].name;
+                k=k+1;
+                pinakas[k+i]=data[i].production_year;
+                k=k+1;
+                pinakas[k+i]=data[i].price;
+                k=k+1;
+                pinakas[k+i]=data[i].color;
+                k=k+1;
+                pinakas[k+i]=data[i].size;
+            }
          let table = document.getElementById("dynamic_island").getElementsByTagName('tbody')[0];
          table.innerHTML = '';
-         if( data.length/6 <1){
+
+         if( pinakas.length/6 <1){
             document.querySelector("."+"results").classList.add("display-results");
             document.querySelector("."+"results").innerHTML="No product was found with this name";
          }
          else{
-            temp=data.length/6;
+            temp=pinakas.length/6;
             document.querySelector("."+"results").classList.add("display-results");
             if(temp==1){
                 document.querySelector("."+"results").innerHTML=temp+" result";
@@ -32,12 +51,12 @@ searchButtonOnClick = () => {
             }
             
          }
-         for (let i = 0; i < data.length/6; i++){    
+         for (let i = 0; i < pinakas.length/6; i++){    
          let newRow = table.insertRow();
          k=0;
          for (let j = i*6; j < 6*(i+1); j++) {  
           let newCell = newRow.insertCell(k);
-          Text="  "+data[j];
+          Text="  "+pinakas[j];
           let newText = document.createTextNode(Text)
           newCell.appendChild(newText);
           k++;
